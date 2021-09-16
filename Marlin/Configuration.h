@@ -78,8 +78,8 @@
 
 /**
  * Z-Probe type (must be none or one of them)
- * Z-Offset = -1.625 ==> 
- * M851 Z-1.625
+ * Z-Offset = -1.863 ==> 
+ * M851 Z-1.863
  * M500
  * If a Z-Probe type is selected, a Bed Leveling type other than MANUAL must be selected.
  */
@@ -1459,7 +1459,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, -1.8 }
+#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, -1.863 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
