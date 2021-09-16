@@ -56,7 +56,7 @@
  * (How to center prints: https://github.com/JimBrown/MarlinTarantula/wiki/How-to-center-your-prints-(EasyConfig))
  */
 #define NOZZLE_X          0
-#define NOZZLE_Y          0
+#define NOZZLE_Y          -47
 
 /**
  * Minimal Z height (in mm) before homing (G28) for Z clearance above the bed, clamps, ...
@@ -67,7 +67,7 @@
  * Primary Extruder steps per mm (plugged in to E0 port on controller)
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
-#define E0_STEPS      100 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
+#define E0_STEPS      96 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
 #define CHANGE_E0_DIRECTION      // If your extruder is going backwards, enable this.
 
 /**
@@ -78,6 +78,9 @@
 
 /**
  * Z-Probe type (must be none or one of them)
+ * Z-Offset = -1.625 ==> 
+ * M851 Z-1.625
+ * M500
  * If a Z-Probe type is selected, a Bed Leveling type other than MANUAL must be selected.
  */
 #define BLTOUCH       // ANTClabs BLTouch sensor (might also work with clones) <-- UNCOMMENT FOR BLTOUCH
@@ -103,20 +106,20 @@
  * If you have a dual nozzle the offsets are calculated from the primary nozzle (the one plugged in to E0)
  */
 #define SENSOR_LEFT        0
-#define SENSOR_RIGHT       0
-#define SENSOR_FRONT       0
+#define SENSOR_RIGHT       42 // X58 ==> 58 - 100 = -42
+#define SENSOR_FRONT       7  // Y107 ==> 107 - 100 = 7
 #define SENSOR_BEHIND      0
 
 /**
  * Number of grid points in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
  */
-#define GRID_POINTS        3
+#define GRID_POINTS        15
 
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
  */
-#define BED_MARGIN         1
+#define BED_MARGIN         18
 
 /**
  * Servo probe deploy and stow angles
@@ -345,7 +348,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Jim Brown, TEVO Tarantula EasyConfig)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(KB+Jim Brown, TEVO Tarantula EasyConfig)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -1456,7 +1459,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, -1.8 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
