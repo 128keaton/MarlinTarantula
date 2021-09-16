@@ -28,7 +28,7 @@
 
 ***********************************************************************/
 
-#define PRINTER_NAME "TEVO Tarantula (EasyConfig)"  // Change this to whatever you wish, or leave it as it is.
+#define PRINTER_NAME "Plassole"  // Change this to whatever you wish, or leave it as it is.
                                                     // NOTE: Whatever you put here will have " Ready..." appended to it.
 
 /**
@@ -36,10 +36,10 @@
  */
 //#define LARGE_BED
 #define SDSUPPORT
-//#define CHANGE_Y_DIRECTION        // If your bed homes in the wrong direction (it should move front to back) enable this.
+#define CHANGE_Y_DIRECTION        // If your bed homes in the wrong direction (it should move front to back) enable this.
 //#define CHANGE_X_DIRECTION        // If your X carriage homes in the wrong direction (it should move right to left) enable this.
 //#define CHANGE_Z_DIRECTION        // If your Z homes in the wrong direction (it should move top to bottom) enable this.
-//#define HOTEND_E3DV6              // Genuine E3D v6 hotend.
+#define HOTEND_E3DV6              // Genuine E3D v6 hotend.
 //#define FULL_GRAPHIC_SMART        // Enable this if you have a RepRap Discount Full Graphic Smart Controller (The
                                     // stock controller is a RepRap Discount Smart Controller)
 #define NUM_Z_STEPPER_DRIVERS 1    // Change this to 2 if you have dual Z stepper motors with the second stepper motor
@@ -68,7 +68,7 @@
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
 #define E0_STEPS      100 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
-//#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this.
+#define CHANGE_E0_DIRECTION      // If your extruder is going backwards, enable this.
 
 /**
  * Z Axis steps per mm (Default for stock lead screw is 1600)
@@ -80,7 +80,7 @@
  * Z-Probe type (must be none or one of them)
  * If a Z-Probe type is selected, a Bed Leveling type other than MANUAL must be selected.
  */
-//#define BLTOUCH       // ANTClabs BLTouch sensor (might also work with clones)
+//#define BLTOUCH       // ANTClabs BLTouch sensor (might also work with clones) <-- UNCOMMENT FOR BLTOUCH
 //#define SN04          // Green sensor
 //#define INDUCTIVE_NO  // Normally open inductive sensor
 //#define INDUCTIVE_NC  // Normally closed inductive sensor
@@ -93,7 +93,7 @@
  */
 //#define TRIPOINT
 //#define LINEAR
-//#define BILINEAR
+//#define BILINEAR  <-- UNCOMMENT FOR BLTOUCH
 //#define UBL
 #define MANUAL
 
@@ -154,18 +154,19 @@
 /**
  * TEVO Tarantula Custom PID Settings - Stock Hotend
  */
-#define  hot_Kp 9.84
-#define  hot_Ki 0.50
-#define  hot_Kd 48.17
+// Kp: 24.52 Ki: 3.18 Kd: 47.20
+#define hot_Kp 29.79
+#define hot_Ki 5.51
+#define hot_Kd 40.26
 // FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
 /**
  * TEVO Tarantula Custom PID Settings - Stock Heatbed
  */
-#define  bed_Kp 984.88
-#define  bed_Ki 193.91
-#define  bed_Kd 1250.55
+#define bed_Kp 101.29
+#define bed_Ki 19.94
+#define bed_Kd 342.98
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
@@ -742,7 +743,9 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
 #if ENABLED(HOTEND_E3DV6)
-  #define TEMP_SENSOR_0 5
+  // #define TEMP_SENSOR_0 5
+  // had to switch to old NTK 3950 thermistor
+  #define TEMP_SENSOR_0 1
 #else
   #define TEMP_SENSOR_0 1
 #endif
@@ -838,8 +841,8 @@
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
@@ -1664,7 +1667,7 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 200
+#define X_BED_SIZE 183
 #if ENABLED(LARGE_BED)
   #define Y_BED_SIZE 280
 #else
@@ -1672,12 +1675,23 @@
 #endif
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
+/*
 #define X_MIN_POS 0 - XTRA_BED_LEFT
 #define Y_MIN_POS 0 - XTRA_BED_BACK
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE + XTRA_BED_RIGHT
 #define Y_MAX_POS Y_BED_SIZE + XTRA_BED_FRONT
+#define Z_MAX_POS 200*/
+
+#define X_MIN_POS -8 // set by KB for offset endstop
+#define Y_MIN_POS -20 // set by KB for offset endstop
+#define Z_MIN_POS 0
+
+#define X_MAX_POS 175 // set by KB for fang duct
+#define Y_MAX_POS 220 // set by KB
+
 #define Z_MAX_POS 200
+
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
