@@ -10,14 +10,16 @@
 Additional documentation can be found at the [Marlin Home Page](https://marlinfw.org/).
 Please test this firmware and let us know if it misbehaves in any way. Volunteers are standing by!
 
-============================================================================
+---
 
-__Configured for MY Tevo Tarantula. It works for me, it may not work for you!__
+#### Configured for MY Tevo Tarantula. It works for me, it may not work for you!
 
 This firmware was originally modified by [Jim Brown](https://github.com/JimBrown/MarlinTarantula)
 
 My printer is very customized, based on the TEVO Tarantula frame, but with some goodies like a E3D Volcano, 50W heater, V6 hotend, BLTouch ABL, modified endstops, etc.
 This repo is just so I can save/track changes to my firmware as I need them.
+
+---
 
 Open configuration.h file in a text editor and make the changes at the top (EasyConfig)
 section of the file. You should not have to make any other changes.
@@ -34,7 +36,7 @@ Facebook group at https://www.facebook.com/groups/TEVO.3dprinter.owners/.)
 
 Thanks!
 
-============================================================================
+---
 
 ## Marlin 2.0 Bugfix Branch
 
