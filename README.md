@@ -1,6 +1,25 @@
-============================================================================
+# Marlin 3D Printer Firmware
 
-__Configured for MY Tevo Tarantula. It works for me, it may not work for you!__
+![GitHub](https://img.shields.io/github/license/marlinfirmware/marlin.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/marlinfirmware/marlin.svg)
+![GitHub Release Date](https://img.shields.io/github/release-date/marlinfirmware/marlin.svg)
+[![Build Status](https://github.com/MarlinFirmware/Marlin/workflows/CI/badge.svg?branch=bugfix-2.0.x)](https://github.com/MarlinFirmware/Marlin/actions)
+
+<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
+
+Additional documentation can be found at the [Marlin Home Page](https://marlinfw.org/).
+Please test this firmware and let us know if it misbehaves in any way. Volunteers are standing by!
+
+---
+
+#### Configured for MY Tevo Tarantula. It works for me, it may not work for you!
+
+This firmware was originally modified by [Jim Brown](https://github.com/JimBrown/MarlinTarantula)
+
+My printer is very customized, based on the TEVO Tarantula frame, but with some goodies like a E3D Volcano, 50W heater, V6 hotend, BLTouch ABL, modified endstops, etc.
+This repo is just so I can save/track changes to my firmware as I need them.
+
+---
 
 Open configuration.h file in a text editor and make the changes at the top (EasyConfig)
 section of the file. You should not have to make any other changes.
@@ -17,19 +36,7 @@ Facebook group at https://www.facebook.com/groups/TEVO.3dprinter.owners/.)
 
 Thanks!
 
-============================================================================
-
-# Marlin 3D Printer Firmware
-
-![GitHub](https://img.shields.io/github/license/marlinfirmware/marlin.svg)
-![GitHub contributors](https://img.shields.io/github/contributors/marlinfirmware/marlin.svg)
-![GitHub Release Date](https://img.shields.io/github/release-date/marlinfirmware/marlin.svg)
-[![Build Status](https://github.com/MarlinFirmware/Marlin/workflows/CI/badge.svg?branch=bugfix-2.0.x)](https://github.com/MarlinFirmware/Marlin/actions)
-
-<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
-
-Additional documentation can be found at the [Marlin Home Page](https://marlinfw.org/).
-Please test this firmware and let us know if it misbehaves in any way. Volunteers are standing by!
+---
 
 ## Marlin 2.0 Bugfix Branch
 
