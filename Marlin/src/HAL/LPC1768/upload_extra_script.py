@@ -86,7 +86,7 @@ def before_upload(source, target, env):
 
 			if target_file_found or target_drive_found:
 				env.Replace(
-					UPLOAD_FLAGS="-P$UPLOAD_PORT"
+					UPLOAD_FLAGS="-P$UPLOAD_PORT -V"
 				)
 
 		elif current_OS == 'Darwin':  # MAC
@@ -116,6 +116,8 @@ def before_upload(source, target, env):
 			print('\nUpload disk: ', upload_disk, '\n')
 		else:
 			print_error('Autodetect Error')
+
+		env.Replace(UPLOAD_FLAGS="-V")
 
 	except Exception as e:
 		print_error(str(e))

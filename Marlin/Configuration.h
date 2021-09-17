@@ -28,7 +28,7 @@
 
 ***********************************************************************/
 
-#define PRINTER_NAME "TEVO Tarantula (EasyConfig)"  // Change this to whatever you wish, or leave it as it is.
+#define PRINTER_NAME "Plassole"  // Change this to whatever you wish, or leave it as it is.
                                                     // NOTE: Whatever you put here will have " Ready..." appended to it.
 
 /**
@@ -36,10 +36,10 @@
  */
 //#define LARGE_BED
 #define SDSUPPORT
-//#define CHANGE_Y_DIRECTION        // If your bed homes in the wrong direction (it should move front to back) enable this.
+#define CHANGE_Y_DIRECTION        // If your bed homes in the wrong direction (it should move front to back) enable this.
 //#define CHANGE_X_DIRECTION        // If your X carriage homes in the wrong direction (it should move right to left) enable this.
 //#define CHANGE_Z_DIRECTION        // If your Z homes in the wrong direction (it should move top to bottom) enable this.
-//#define HOTEND_E3DV6              // Genuine E3D v6 hotend.
+#define HOTEND_E3DV6              // Genuine E3D v6 hotend.
 //#define FULL_GRAPHIC_SMART        // Enable this if you have a RepRap Discount Full Graphic Smart Controller (The
                                     // stock controller is a RepRap Discount Smart Controller)
 #define NUM_Z_STEPPER_DRIVERS 1    // Change this to 2 if you have dual Z stepper motors with the second stepper motor
@@ -56,7 +56,7 @@
  * (How to center prints: https://github.com/JimBrown/MarlinTarantula/wiki/How-to-center-your-prints-(EasyConfig))
  */
 #define NOZZLE_X          0
-#define NOZZLE_Y          0
+#define NOZZLE_Y          -47
 
 /**
  * Minimal Z height (in mm) before homing (G28) for Z clearance above the bed, clamps, ...
@@ -67,8 +67,8 @@
  * Primary Extruder steps per mm (plugged in to E0 port on controller)
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
-#define E0_STEPS      100 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
-//#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this.
+#define E0_STEPS      96 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
+#define CHANGE_E0_DIRECTION      // If your extruder is going backwards, enable this.
 
 /**
  * Z Axis steps per mm (Default for stock lead screw is 1600)
@@ -78,9 +78,12 @@
 
 /**
  * Z-Probe type (must be none or one of them)
+ * Z-Offset = -1.863 ==> 
+ * M851 Z-1.863
+ * M500
  * If a Z-Probe type is selected, a Bed Leveling type other than MANUAL must be selected.
  */
-//#define BLTOUCH       // ANTClabs BLTouch sensor (might also work with clones)
+#define BLTOUCH       // ANTClabs BLTouch sensor (might also work with clones) <-- UNCOMMENT FOR BLTOUCH
 //#define SN04          // Green sensor
 //#define INDUCTIVE_NO  // Normally open inductive sensor
 //#define INDUCTIVE_NC  // Normally closed inductive sensor
@@ -94,8 +97,8 @@
 //#define TRIPOINT
 //#define LINEAR
 //#define BILINEAR
-//#define UBL
-#define MANUAL
+#define UBL
+//#define MANUAL
 
 /**
  * Z-Probe offset from nozzle (https://github.com/JimBrown/MarlinTarantula/wiki/How-to-determine-your-Z-Probe-offset)
@@ -103,20 +106,20 @@
  * If you have a dual nozzle the offsets are calculated from the primary nozzle (the one plugged in to E0)
  */
 #define SENSOR_LEFT        0
-#define SENSOR_RIGHT       0
-#define SENSOR_FRONT       0
+#define SENSOR_RIGHT       42 // X58 ==> 58 - 100 = -42
+#define SENSOR_FRONT       7  // Y107 ==> 107 - 100 = 7
 #define SENSOR_BEHIND      0
 
 /**
  * Number of grid points in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
  */
-#define GRID_POINTS        3
+#define GRID_POINTS        15
 
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
  */
-#define BED_MARGIN         1
+#define BED_MARGIN         18
 
 /**
  * Servo probe deploy and stow angles
@@ -154,18 +157,19 @@
 /**
  * TEVO Tarantula Custom PID Settings - Stock Hotend
  */
-#define  hot_Kp 9.84
-#define  hot_Ki 0.50
-#define  hot_Kd 48.17
+// Kp: 24.52 Ki: 3.18 Kd: 47.20
+#define hot_Kp 29.79
+#define hot_Ki 5.51
+#define hot_Kd 40.26
 // FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
 /**
  * TEVO Tarantula Custom PID Settings - Stock Heatbed
  */
-#define  bed_Kp 984.88
-#define  bed_Ki 193.91
-#define  bed_Kd 1250.55
+#define bed_Kp 101.29
+#define bed_Ki 19.94
+#define bed_Kd 342.98
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
@@ -344,7 +348,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Jim Brown, TEVO Tarantula EasyConfig)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(KB+Jim Brown, TEVO Tarantula EasyConfig)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -742,7 +746,9 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
 #if ENABLED(HOTEND_E3DV6)
-  #define TEMP_SENSOR_0 5
+  // #define TEMP_SENSOR_0 5
+  // had to switch to old NTK 3950 thermistor
+  #define TEMP_SENSOR_0 1
 #else
   #define TEMP_SENSOR_0 1
 #endif
@@ -838,8 +844,8 @@
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
@@ -1453,7 +1459,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { SENSOR_RIGHT - SENSOR_LEFT, SENSOR_BEHIND - SENSOR_FRONT, -1.863 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1664,7 +1670,7 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 200
+#define X_BED_SIZE 183
 #if ENABLED(LARGE_BED)
   #define Y_BED_SIZE 280
 #else
@@ -1672,12 +1678,23 @@
 #endif
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
+/*
 #define X_MIN_POS 0 - XTRA_BED_LEFT
 #define Y_MIN_POS 0 - XTRA_BED_BACK
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE + XTRA_BED_RIGHT
 #define Y_MAX_POS Y_BED_SIZE + XTRA_BED_FRONT
+#define Z_MAX_POS 200*/
+
+#define X_MIN_POS -8 // set by KB for offset endstop
+#define Y_MIN_POS -20 // set by KB for offset endstop
+#define Z_MIN_POS 0
+
+#define X_MAX_POS 175 // set by KB for fang duct
+#define Y_MAX_POS 220 // set by KB
+
 #define Z_MAX_POS 200
+
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
